@@ -8,7 +8,7 @@ export default class App extends Component {
   dataFetcher = new DataFetcher();
 
   state = {
-    itemList: [],
+    itemList: null,
     term: ''
   }
 
@@ -36,7 +36,9 @@ export default class App extends Component {
   render() {
     const { itemList, term } = this.state;
 
-    const visibleItems = this.search(itemList, term);
+    const visibleItems = itemList === null
+      ? <span>Загрузка...</span>
+      : <ItemList itemList = { this.search(itemList, term) }/>;
 
     return (
       <div className="App">
@@ -45,7 +47,7 @@ export default class App extends Component {
             <div className="col-12">
               <h1>Вакансии для Вас:</h1>
               <SearchPanel onSearchChange = { this.onSearchChange } term = {this.state.term }/>
-              <ItemList itemList = { visibleItems }/>
+              {visibleItems}
             </div>
           </div>
         </div>

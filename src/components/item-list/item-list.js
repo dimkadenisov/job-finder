@@ -72,7 +72,7 @@ export default class ItemList extends Component {
   render() {
     const {itemList} = this.props;
 
-    if(!itemList) return <span>Загрузка...</span>
+    if(itemList.length === 0) return <span>Подходящих вакансий не найдено</span>
 
     const items = this.renderItems(itemList);
 
